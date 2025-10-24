@@ -44,7 +44,7 @@ public class AlienFoundation : MonoBehaviour
         }
     }
 
-    // Optional: visualize chase radius
+    //Visualize chase radius
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
