@@ -8,8 +8,12 @@ using UnityEditor; //To display something in scene
 
 public class Node : MonoBehaviour
 {
+    public Transform node_manager;
     public Transform player;
     public float range = 5f;
+    
+    //Calculate the probability that the player is in that Node
+    public double nodeProbability;
     
     /*
     The amount of time that the player has been in the Node. 
@@ -17,12 +21,14 @@ public class Node : MonoBehaviour
     that the player is inside the range of that Node.
     */
     public float timeInside = 1f; 
-    public int score = 1;
+    public int score = 1; 
 
     void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
+        node_manager = GameObject.FindWithTag("NodeManager").transform;
     }
+    
 
     void Update()
     {
@@ -33,6 +39,10 @@ public class Node : MonoBehaviour
         }
 
         score = (int) timeInside;
+    }
+
+    public void calculateProbability(){
+        nodeProbability = (1.0* score)/node_manager.GetComponent<NodeManager>().totalScore;
     }
 
     #if UNITY_EDITOR

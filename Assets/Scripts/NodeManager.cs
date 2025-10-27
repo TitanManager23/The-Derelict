@@ -7,7 +7,7 @@ public class NodeManager : MonoBehaviour
     public List<Node> nodeList = new List<Node>();
 
     //The sum of the scores of all the
-    public int totalScore = 0;
+    public int totalScore = 1;
     
     void Start()
     {
@@ -16,6 +16,7 @@ public class NodeManager : MonoBehaviour
 
         // Every 10 seconds, sums the scores
         InvokeRepeating("sumScores", 5f, 10f);
+        InvokeRepeating("calculateNodesProb", 5f, 10f);
     }
 
 
@@ -43,6 +44,12 @@ public class NodeManager : MonoBehaviour
             {
                 nodeList.Add(node);
             }
+        }
+    }
+
+    private void calculateNodesProb(){
+        foreach(Node node in nodeList){
+            node.calculateProbability();
         }
     }
 }
