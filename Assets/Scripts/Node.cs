@@ -19,6 +19,11 @@ public class Node : MonoBehaviour
     public float timeInside = 1f; 
     public int score = 1;
 
+    void Start()
+    {
+        player = GameObject.FindWithTag("Player").transform;
+    }
+
     void Update()
     {
         float distance = Vector3.Distance(transform.position, player.position);
