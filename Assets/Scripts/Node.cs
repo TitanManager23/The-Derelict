@@ -26,8 +26,6 @@ public class Node : MonoBehaviour
         if(distance<range){
             timeInside += Time.deltaTime; //Increase the amount of time in the Node
         }
-
-        //Handles.Label(timeInside.ToString());
     }
 
     #if UNITY_EDITOR
