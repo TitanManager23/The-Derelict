@@ -17,7 +17,7 @@ public class Node : MonoBehaviour
     that the player is inside the range of that Node.
     */
     public float timeInside = 1f; 
-
+    public int score = 1;
 
     void Update()
     {
@@ -26,6 +26,8 @@ public class Node : MonoBehaviour
         if(distance<range){
             timeInside += Time.deltaTime; //Increase the amount of time in the Node
         }
+
+        score = (int) timeInside;
     }
 
     #if UNITY_EDITOR
@@ -42,7 +44,8 @@ public class Node : MonoBehaviour
         style.fontSize = 14;                  // Font size
         style.fontStyle = FontStyle.Bold;     // Bold, Italic, etc.
 
-        Handles.Label(transform.position + Vector3.up * 2, "Time Inside: " + timeInside, style);
+        Handles.Label(transform.position + Vector3.up * 2, "Score: " + score, style);
+
         
     }
     #endif

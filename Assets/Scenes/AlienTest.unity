@@ -295,6 +295,7 @@ MonoBehaviour:
   player: {fileID: 1556402343}
   range: 5
   timeInside: 1
+  score: 1
 --- !u!135 &792713351
 SphereCollider:
   m_ObjectHideFlags: 0
