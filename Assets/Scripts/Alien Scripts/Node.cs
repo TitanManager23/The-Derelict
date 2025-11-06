@@ -22,7 +22,16 @@ public class Node : MonoBehaviour
     */
     public float timeInside = 1f; 
     public int score = 1; 
+    
+    //These variables are used to check the last time the player was inside a Node, and Also to reduce the score.
+    public bool reducingScore = false;
+    public int lastScore = -1;
+    void Awake(){
+        InvokeRepeating("checkLastTimeInside", 15f, 10f);
+    }
 
+    
+    
     void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
@@ -35,7 +44,12 @@ public class Node : MonoBehaviour
         float distance = Vector3.Distance(transform.position, player.position);
 
         if(distance<range){
+            reducingScore = false;
             timeInside += Time.deltaTime; //Increase the amount of time in the Node
+        }
+        //If the bool reduce score is true, and the score is > 1, reduce it
+        else if(reducingScore && score>1){
+            timeInside -= Time.deltaTime/2;
         }
 
         score = (int) timeInside;
@@ -43,6 +57,14 @@ public class Node : MonoBehaviour
 
     public void calculateProbability(){
         nodeProbability = (1.0* score)/node_manager.GetComponent<NodeManager>().totalScore;
+    }
+
+    //If the last score is equal to the current score, that mean that the player has not been in this node, so reducingScore = true
+    public void checkLastTimeInside(){
+        if(lastScore == score){
+            reducingScore = true;
+        }
+        lastScore = score;
     }
 
     #if UNITY_EDITOR
